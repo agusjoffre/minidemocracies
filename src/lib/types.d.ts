@@ -26,6 +26,16 @@ export type User = {
   updated_at?: string;
 };
 
+export type Vote = {
+  id: string;
+  value: boolean;
+  bill_id: string;
+  citizen_id: string;
+  minidemocracy_id: string;
+  created_at?: string;
+  updated_at?: string;
+};
+
 export type Democracy = {
   id: string;
   name: string;
