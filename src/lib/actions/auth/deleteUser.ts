@@ -1,11 +1,9 @@
 "use server";
 
-import { User } from "@/lib/types";
 import { createClient } from "@/lib/supabase/server";
 
 type Response = {
   success: boolean;
-  data?: User;
   error: string | null;
 };
 

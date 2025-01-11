@@ -9,7 +9,7 @@ type Response = {
   error: string | null;
 };
 
-export const createUser = async (user: User): Promise<Response> => {
+export const createUser = async (user: Omit<User, "id">): Promise<Response> => {
   const db = await createClient();
 
   const { data, error } = await db.from("users").insert(user).select().single();

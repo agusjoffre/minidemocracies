@@ -2,7 +2,6 @@
 
 import { User } from "@/lib/types";
 import { createClient } from "@/lib/supabase/server";
-import { currentUser } from "@clerk/nextjs/server";
 
 type Response = {
   success: boolean;
@@ -10,25 +9,13 @@ type Response = {
   error: string | null;
 };
 
-export const updateUser = async (user: Omit<User, "id">): Promise<Response> => {
-  ///////////////////////////////////////
-
+export const getUser = async (userId: string): Promise<Response> => {
   const db = await createClient();
-
-  const clerkUser = await currentUser();
-
-  if (!clerkUser) {
-    return {
-      error: "User not found",
-      success: false,
-    };
-  }
 
   const { data, error } = await db
     .from("users")
-    .update(user)
-    .eq("id", clerkUser.id)
     .select()
+    .eq("id", userId)
     .single();
 
   if (error)
@@ -38,7 +25,7 @@ export const updateUser = async (user: Omit<User, "id">): Promise<Response> => {
     };
 
   if (!data)
-    return { error: "User not updated. No data returned", success: false };
+    return { error: "User not fetched. No data returned", success: false };
 
   return {
     data,

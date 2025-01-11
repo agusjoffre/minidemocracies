@@ -9,32 +9,34 @@ type Response = {
   error: string | null;
 };
 
-export const getMembershipsFromDemocracy = async (democracyId: string) => {
+export const getMembershipsFromUser = async (
+  userId: string
+): Promise<Response> => {
   const db = await createClient();
 
-  const { data, error } = await db
+  const { data: dataMemberships, error: membershipsError } = await db
     .from("memberships")
     .select()
-    .eq("democracy_id", democracyId);
+    .eq("user_id", userId);
 
-  if (error) {
+  if (membershipsError) {
     return {
       data: null,
-      error: error.message,
+      error: membershipsError.message,
       success: false,
     };
   }
 
-  if (!Array.isArray(data)) {
+  if (!dataMemberships) {
     return {
       data: null,
-      error: "No data. No memberships array returned",
+      error: "Memberships not fetched. No data returned",
       success: false,
     };
   }
 
   return {
-    data,
+    data: dataMemberships as Membership[],
     error: null,
     success: true,
   };
