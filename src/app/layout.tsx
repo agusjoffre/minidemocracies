@@ -1,20 +1,22 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Kumbh_Sans } from "next/font/google";
 import "./globals.css";
+import Header from "@/components/header/header";
+import { ClerkProvider } from "@clerk/nextjs";
 
-const geistSans = Geist({
+const kumbhSans = Kumbh_Sans({
   variable: "--font-geist-sans",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
+const geistMono = Kumbh_Sans({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
-  title: "Mini Democracies",
-  description: "Create or join a Mini Democracy with your friends and family",
+  title: "Consensys",
+  description: "Create or join a consensystem with your friends and family",
 };
 
 export default function RootLayout({
@@ -23,12 +25,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang="en">
+        <body
+          className={`${kumbhSans.variable} ${geistMono.variable} antialiased`}
+        >
+          <Header />
+          {children}
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

@@ -9,6 +9,8 @@ import { createUser } from "@/lib/actions/auth/createUser";
 export async function POST(req: Request) {
   const SIGNING_SECRET = process.env.SIGNING_SECRET;
 
+  console.log("starting webhook");
+
   if (!SIGNING_SECRET) {
     throw new Error(
       "Error: Please add SIGNING_SECRET from Clerk Dashboard to .env or .env.local"
@@ -39,6 +41,7 @@ export async function POST(req: Request) {
 
   // Verify payload with headers
   try {
+    console.log("verifying webhook");
     evt = wh.verify(body, {
       "svix-id": svix_id,
       "svix-timestamp": svix_timestamp,

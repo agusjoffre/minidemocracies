@@ -45,6 +45,7 @@ export type Democracy = {
   color1: string;
   color2?: string;
   color3?: string;
+  invite_code: string;
   created_at?: string;
   updated_at?: string;
 };
