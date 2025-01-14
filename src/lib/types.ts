@@ -48,6 +48,7 @@ export type Democracy = {
   invite_code: string;
   created_at?: string;
   updated_at?: string;
+  creator_id: string;
 };
 
 export type Membership = {

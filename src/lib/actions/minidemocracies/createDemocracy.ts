@@ -9,11 +9,8 @@ type Response = {
   error: string | null;
 };
 
-// IMPORTANTE: CUANDO SE CREA LA MINIDEMOCRACY DEBE CREARSE UN MEMBERSHIP ASOCIADO CON EL USER. SINO NO SERA UNIDO A LA DEMOCRACIA.
-// ESTO ES ASI PARA QUE NO EXISTAN OWNERS O CREATORS DE DEMOCRACIAS.
-
 export const createDemocracy = async (
-  democracy: Omit<Democracy, "id">
+  democracy: Omit<Democracy, "id" | "invite_code">
 ): Promise<Response> => {
   const db = await createClient();
 

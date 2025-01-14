@@ -6,8 +6,8 @@ type Props = {
   };
 };
 
-const DemocracyPage = (props: Props) => {
-  const democracyId = props.params.id;
+const DemocracyPage = async ({ params }: Props) => {
+  const democracyId = await Promise.resolve(params.id);
 
   return <div>DemocracyPage: {democracyId}</div>;
 };

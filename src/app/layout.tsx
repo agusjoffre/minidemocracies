@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, Kumbh_Sans } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/header/header";
 import { ClerkProvider } from "@clerk/nextjs";
+import Providers from "@/lib/queryProvider";
 
 const kumbhSans = Kumbh_Sans({
   variable: "--font-geist-sans",
@@ -27,12 +28,14 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-        <body
-          className={`${kumbhSans.variable} ${geistMono.variable} antialiased`}
-        >
-          <Header />
-          {children}
-        </body>
+        <Providers>
+          <body
+            className={`${kumbhSans.variable} ${geistMono.variable} antialiased`}
+          >
+            <Header />
+            {children}
+          </body>
+        </Providers>
       </html>
     </ClerkProvider>
   );
