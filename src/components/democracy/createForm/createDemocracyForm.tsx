@@ -122,7 +122,6 @@ export function DemocracyForm({ userId }: Props) {
   });
 
   const submit = (data: DemocracySchema) => {
-    console.log(data);
     mutateCreateDemocracy(data);
   };
 
